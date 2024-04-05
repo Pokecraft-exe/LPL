@@ -1,0 +1,30 @@
+// comment (disable the whole line)
+
+(variable
+"visibility"
+"type"
+"name"
+map("value")
+// a map separates the scheme and the value
+
+inside structure 'function' "visibility" = local
+inside structure 'page' "visibility" = global
+multiline = false
+
+==
+kw("type") kw("name") = or('variable' 'function' 'int' 'float' 'string' 'char')
+||
+default("type" = any) kw("name") = or('variable' 'function' 'int' 'float' 'string' 'char')
+)
+
+(function
+"name"
+list("properties", 012)
+// list can numerate as 012, 123, ABC
+// it creates into the api a new property called property name + 'Num' in this example : 'propertiesNum'
+// and for each items property name + numeration
+==
+def kw('name')([]'variable'("properties") = 'value'
+)
+
+// out -> LPL["variable"][0...x]["visibility"] || ["type"] || ["name"]
