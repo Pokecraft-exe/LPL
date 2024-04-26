@@ -7,11 +7,18 @@
 
 #include "LPL.h"
 
-void main() {
-	LPL parser;
-	if (parser.loadScript("Texte.txt")) std::cout << "opened\n";
+string tests[3]{
+	"int a = 0",
+	"a = 0",
+	"hello worsld"
+};
 
-	for (auto s : parser.schemes) std::cout << s << std::endl;
+void main(int argc, char** argv) {
+	LPL parser;
+
+	parser.loadScript("Texte.txt");
+
+	parser.compileScheme(parser.schemes[0]);
 
 	return;
 }

@@ -4,27 +4,57 @@
 "visibility"
 "type"
 "name"
+"isExtern"
+ref("function", 'function')
 map("value")
 // a map separates the scheme and the value
 
-inside structure 'function' "visibility" = local
-inside structure 'page' "visibility" = global
-multiline = false
+inside 'page' "visibility" = global
+inside 'function' "visibility" = local
+inside 'function' "function" = parent()
+multiline = fals
 
 ==
-kw("type") kw("name") = or('variable' 'function' 'int' 'float' 'string' 'char')
-||
-default("type" = any) kw("name") = or('variable' 'function' 'int' 'float' 'string' 'char')
+default("type" = any) "name" = or('variable' 'function' 'int' 'float' 'string' 'char' 'operation')
 )
 
 (function
 "name"
-list("properties", 012)
+list("properties" 'variable')
 // list can numerate as 012, 123, ABC
 // it creates into the api a new property called property name + 'Num' in this example : 'propertiesNum'
 // and for each items property name + numeration
+
+multiline = true
+parent = true
+
 ==
-def kw('name')([]'variable'("properties") = 'value'
+def "name" ([]'variable'("properties") = 'value'):
+...()
+end
 )
 
-// out -> LPL["variable"][0...x]["visibility"] || ["type"] || ["name"]
+(int
+==
+numeric()
+)
+
+(float
+==
+numeric().numeric()
+)
+
+(string
+==
+\"...()\"
+)
+
+(char
+==
+\'character()\'
+)
+
+// functions: 
+// ...() => until | map() | list() | ref() => pointer to a scheme | parent() => get the parent scheme
+// numeric() => 0123...9 | alpha() => abc...zAB...Z | alphanum() => aA...zZ...0...9
+// character() => only accepts a single charatrer
