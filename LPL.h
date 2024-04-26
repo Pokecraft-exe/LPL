@@ -89,7 +89,7 @@ private:
 		std::ifstream src("Source.txt");
 		std::string func = slurp(src);
 		func = ReplaceAll(func, "%s", scheme);
-		return ;
+		return func;
 	}
 
 public:

@@ -18,6 +18,7 @@ void main(int argc, char** argv) {
 
 	if (argc != 2) {
 		std::cout << "LPL compiler must have only one argument: [file]" << std::endl;
+		return;
 	}
 
 	parser.loadScript(argv[1]);
