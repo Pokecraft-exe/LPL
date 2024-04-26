@@ -1,0 +1,104 @@
+		std::vector<std::string> Tpattern = LPLtokenize(pattern);
+		std::vector<std::string> toIdentify = LPLtokenize(std::string(begin, end), false);
+		std::vector<std::vector<std::string>> TTpattern = LPLtokenize(Tpattern);
+		%s n;
+		identification_result result;
+		result.success = false;
+		int i = 0;
+		for(auto token : TTpattern) {
+			if(token[0] == "default") {
+				if (toIdentify.size() < TTpattern.size()) {
+					string def = "";
+					def = *(std::find(token.begin(), token.end(), "=") + 1);
+					string into = "";
+					into = *(std::find(token.begin(), token.end(), """) + 1);
+					toIdentify.insert(toIdentify.begin() + i, def);
+					n.push(into, def);
+					i++;
+					continue;
+				}
+				if (toIdentify.size() >= TTpattern.size()) {
+					string into = "";
+					into = *(std::find(token.begin(), token.end(), """) + 1);
+					n.push(into, toIdentify[i]);
+					i++;
+					continue;
+				}
+				return result;
+			}
+			if (token[0] == "or") {
+				std::cout << "or() : line " << std::to_string(__LINE__) << "; ";
+				i++;
+				continue;
+			}
+			if (token[0] == "." && token[1] == "." && token[2] == ".") {
+				std::cout << "...() : line " << std::to_string(__LINE__) << ";";
+				i++;
+				continue;
+			}
+			if (token[0] == "numeric") {
+				if (token.size() == 3 &&
+					token[1] == "(" &&
+					token[2] == ")") {
+					std::string numeric = "0123456789";
+					for (auto c : toIdentify[i]) {
+						if (numeric.find(c) == std::string::npos) {
+							return result;
+						}
+					}
+					i++;
+					continue;
+				}
+				return result;
+			}
+			if (token[0] == "alpha") {
+				if (token.size() == 3 &&
+					token[1] == "(" &&
+					token[2] == ")") {
+					std::string alpha = "azertyuiopqsdfghjklmwxcvbnAZERTYUIOPQSDFGHJKLMWXCVBN";
+					for (auto c : toIdentify[i]) {
+						if (alpha.find(c) == std::string::npos) {
+							return result;
+						}
+					}
+					i++;
+					continue;
+				}
+				return result;
+			}
+			if (token[0] == "alphanum") {
+				if (token.size() == 3 &&
+					token[1] == "(" &&
+					token[2] == ")") {
+					std::string alphanum = "azertyuiopqsdfghjklmwxcvbnAZERTYUIOPQSDFGHJKLMWXCVBN0123456";
+					for (auto c : toIdentify[i]) {
+						if (alphanum.find(c) == std::string::npos) {
+							return result;
+						}
+					}
+					i++;
+					continue;
+				}
+				return result;
+			};
+			if (token[0] == "character") {
+				int num = -1;
+				while (toIdentify[i][num++] != 0);
+				if (i > 1) return result;
+				i++;
+				continue;
+			}
+			if (token[0] == "\"") {
+				n.push(token[1], toIdentify[i]);
+				i++;
+				continue;
+			}
+			if (toIdentify[i] != token[0]) {
+				return result;
+			}
+			i++;
+		}
+		result.result = &n;
+		result.success = true;
+		return result;
+	}
