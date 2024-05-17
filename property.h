@@ -7,11 +7,6 @@ enum class functions {
 	ref,
 };
 
-/*struct schemeProperty {
-	bool multiline;
-	std::vector<std::map<std::string, std::string>> definitions;
-};*/
-
 class property {
 private:
 	std::string _name;
@@ -40,7 +35,7 @@ public:
 			return "\tstd::map<std::string, std::string> " + _name + " = {};\n";
 		}
 		if (_function == functions::list) {
-			return "\tstd::vector<" + _arguments + "> " + _name + " = {};\n";
+			return "\tstd::vector<std::string> " + _name + " = {};\n";
 		}
 		return "\tstd::string " + _name + " = \"\";\n";
 	}

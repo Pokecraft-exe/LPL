@@ -1,0 +1,121 @@
+// properties
+{
+enable enum as string
+// enum to string and string to enum
+// also enable enum to string (one way)
+// and enable string to enum (reversed one way)
+
+// AnyEnum.toEnum(string) -> string
+// AnyEnum.toString() -> string
+}
+
+////////////////////////////////////////////////////////////////////
+
+// enums
+[baseTypes
+
+'int' == numeric()
+'float' == exact(numeric().numeric())
+'string' == \" ...() \"
+'char' == \' character() \'
+]
+// exact() requires the pattern without extra spaces
+
+// 'word' reference to a scheme
+// "word" reference to a property
+
+////////////////////////////////////////////////////////////////////
+
+[baseOperators
+"plus" == +
+"minus" == -
+"times" == *
+"divided" == /
+"pow" == **
+"and" == &
+"or" == |
+"xor" == ^
+]
+
+////////////////////////////////////////////////////////////////////
+
+(globalVariable
+"type"
+"name""
+map("baseValue")
+
+unique name into self
+unique name into 'localVariable'
+
+==
+
+or(global extern) default("type"=any) "name" = or()
+)
+
+////////////////////////////////////////////////////////////////////
+
+(localVariable
+"type"
+"name"
+map("value")
+
+exist into parent 'function'
+exist into parent 'child'
+unique name into parent
+unique name into globalVariable
+
+==
+
+default("type"=any) "name" = or("value")
+)
+
+////////////////////////////////////////////////////////////////////
+
+(function
+"name"
+list("properties" 'variable')
+
+is parent
+
+==
+
+def "name"([]("properties" ,)):
+...()
+end
+)
+
+////////////////////////////////////////////////////////////////////
+
+(functionCall
+"callee"
+list("properties")
+
+==
+
+"callee"([])
+)
+
+////////////////////////////////////////////////////////////////////
+
+(child
+"name"
+"owner"
+"ownerType"
+list("properties")
+
+==
+
+def child "name"("ownerType" "owner", []("properties" ,))
+)
+
+////////////////////////////////////////////////////////////////////
+
+(childCall
+"owner"
+"callee"
+list("properties")
+
+==
+
+"owner"."callee"([]("properties" ,))
+)
