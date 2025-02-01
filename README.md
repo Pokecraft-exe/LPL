@@ -95,7 +95,7 @@ This allows parsing inputs like:
 ## Conclusion
 LPL is a robust and extensible language for parsing structured data. Its combination of regex-like flexibility with structured definitions makes it an excellent tool for parsing complex text formats efficiently.
 
-License
+# License
 
 The project, past and future releases and code, is under the CreativeCommons License:
-<img src="https://camo.githubusercontent.com/c6d555019c5655f6ad9c17674fc433d86b74df17cf6f8471d34a3c139e9b0580/68747470733a2f2f6d6972726f72732e6372656174697665636f6d6d6f6e732e6f72672f70726573736b69742f627574746f6e732f38387833312f706e672f62792d6e632d73612e706e67"/>
+<img src="https://camo.githubusercontent.com/c6d555019c5655f6ad9c17674fc433d86b74df17cf6f8471d34a3c139e9b0580/68747470733a2f2f6d6972726f72732e6372656174697665636f6d6d6f6e732e6f72672f70726573736b69742f627574746f6e732f38387833312f706e672f62792d6e632d73612e706e67" width=100/>
